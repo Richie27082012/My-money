@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#064e3b" />
+  <meta name="theme-color" id="metaThemeColor" content="#064e3b" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="My money" />
@@ -15,16 +15,83 @@
     :root {
       --primary: #059669;
       --primary-dark: #064e3b;
+      --primary-mid: #047857;
       --primary-light: #d1fae5;
+      --primary-glow: rgba(16, 185, 129, 0.28);
       --accent: #f59e0b;
       --danger: #ef4444;
       --danger-light: #fee2e2;
-      --bg: #f1f5f9;
-      --card: #ffffff;
+      --bg: #eef2f6;
+      --outer-bg: #cbd5e1;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
       --text: #0f172a;
       --muted: #64748b;
-      --border: #e2e8f0;
-      --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+      --border: rgba(226, 232, 240, 0.9);
+      --input-bg: #ffffff;
+      --subtle-bg: #f8fafc;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+      --glass-dock: rgba(255, 255, 255, 0.68);
+      --glass-border: rgba(255, 255, 255, 0.78);
+      --glass-pill: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.55));
+      --glass-pill-border: rgba(255, 255, 255, 0.95);
+      --glass-shadow: 0 12px 32px rgba(15, 23, 42, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    }
+
+    /* Theme: Ocean Blue */
+    [data-theme="ocean"] {
+      --primary: #0284c7;
+      --primary-dark: #0c4a6e;
+      --primary-mid: #0369a1;
+      --primary-light: #e0f2fe;
+      --primary-glow: rgba(14, 165, 233, 0.28);
+      --bg: #edf4f9;
+    }
+
+    /* Theme: Royal Violet */
+    [data-theme="violet"] {
+      --primary: #7c3aed;
+      --primary-dark: #3b0764;
+      --primary-mid: #6d28d9;
+      --primary-light: #ede9fe;
+      --primary-glow: rgba(139, 92, 246, 0.28);
+      --bg: #f3f0fa;
+    }
+
+    /* Theme: Sunset Coral */
+    [data-theme="sunset"] {
+      --primary: #ea580c;
+      --primary-dark: #7c2d12;
+      --primary-mid: #c2410c;
+      --primary-light: #ffedd5;
+      --primary-glow: rgba(249, 115, 22, 0.28);
+      --bg: #faf2ed;
+    }
+
+    /* Theme: Midnight Dark */
+    [data-theme="dark"] {
+      --primary: #10b981;
+      --primary-dark: #022c22;
+      --primary-mid: #059669;
+      --primary-light: rgba(16, 185, 129, 0.18);
+      --primary-glow: rgba(16, 185, 129, 0.32);
+      --danger: #f87171;
+      --danger-light: rgba(248, 113, 113, 0.18);
+      --bg: #0b1120;
+      --outer-bg: #050811;
+      --card: rgba(30, 41, 59, 0.84);
+      --card-solid: #1e293b;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --border: rgba(51, 65, 85, 0.8);
+      --input-bg: #0f172a;
+      --subtle-bg: #162032;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+      --glass-dock: rgba(15, 23, 42, 0.68);
+      --glass-border: rgba(148, 163, 184, 0.24);
+      --glass-pill: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06));
+      --glass-pill-border: rgba(255, 255, 255, 0.26);
+      --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.2);
     }
 
     * {
@@ -36,11 +103,12 @@
     }
 
     body {
-      background-color: #cbd5e1;
+      background-color: var(--outer-bg);
       color: var(--text);
       display: flex;
       justify-content: center;
       min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     /* Mobile App Shell */
@@ -52,26 +120,29 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 36px rgba(0, 0, 0, 0.18);
       overflow-x: hidden;
+      transition: background-color 0.3s ease;
     }
 
     /* Top Header */
     .app-header {
-      background: linear-gradient(135deg, #064e3b 0%, #059669 100%);
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
       color: #ffffff;
-      padding: 20px 20px 28px;
-      border-bottom-left-radius: 26px;
-      border-bottom-right-radius: 26px;
+      padding: 18px 18px 24px;
+      border-bottom-left-radius: 28px;
+      border-bottom-right-radius: 28px;
       position: relative;
       z-index: 10;
+      box-shadow: 0 10px 26px var(--primary-glow);
+      transition: background 0.35s ease;
     }
 
     .header-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .brand {
@@ -83,15 +154,16 @@
     .brand-logo {
       width: 38px;
       height: 38px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.18);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
       font-size: 16px;
-      color: #a7f3d0;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.32);
     }
 
     .brand-text h1 {
@@ -102,7 +174,7 @@
 
     .brand-text p {
       font-size: 11px;
-      color: #a7f3d0;
+      color: rgba(255, 255, 255, 0.85);
     }
 
     .header-actions {
@@ -111,8 +183,9 @@
     }
 
     .icon-btn {
-      background: rgba(255, 255, 255, 0.16);
-      border: none;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.24);
       color: #ffffff;
       width: 36px;
       height: 36px;
@@ -121,34 +194,37 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: transform 0.15s ease, background 0.2s;
     }
 
     .icon-btn:active {
-      background: rgba(255, 255, 255, 0.3);
+      transform: scale(0.92);
+      background: rgba(255, 255, 255, 0.32);
     }
 
-    /* Balance Card inside Header */
+    /* Liquid Glass Balance Card inside Header */
     .balance-box {
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 18px;
-      padding: 16px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 20px;
+      padding: 15px 16px;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.45);
     }
 
     .balance-label {
       font-size: 12px;
-      color: #d1fae5;
+      color: rgba(255, 255, 255, 0.9);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .balance-amount {
-      font-size: 28px;
+      font-size: 27px;
       font-weight: 800;
-      margin: 6px 0 14px;
+      margin: 5px 0 12px;
       letter-spacing: -0.5px;
     }
 
@@ -156,8 +232,8 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.16);
-      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 11px;
     }
 
     .summary-item {
@@ -169,28 +245,28 @@
     .summary-badge {
       width: 28px;
       height: 28px;
-      border-radius: 8px;
+      border-radius: 9px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 14px;
     }
 
     .badge-in {
-      background: rgba(167, 243, 208, 0.25);
-      color: #6ee7b7;
+      background: rgba(167, 243, 208, 0.28);
+      color: #a7f3d0;
     }
 
     .badge-out {
-      background: rgba(254, 202, 202, 0.25);
-      color: #fca5a5;
+      background: rgba(254, 202, 202, 0.28);
+      color: #fecaca;
     }
 
     .summary-info span {
       display: block;
       font-size: 11px;
-      color: #d1fae5;
+      color: rgba(255, 255, 255, 0.85);
     }
 
     .summary-info strong {
@@ -198,34 +274,44 @@
       font-weight: 700;
     }
 
-    /* Main Scrollable Content */
-    .main-content {
+    /* Swipeable Pages Viewport */
+    .swipe-viewport {
       flex: 1;
-      padding: 16px 16px 90px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      touch-action: pan-y;
     }
 
-    .tab-section {
-      display: none;
-      animation: fadeIn 0.2s ease;
+    .swipe-track {
+      display: flex;
+      width: 400%;
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
     }
 
-    .tab-section.active {
-      display: block;
+    .swipe-track.dragging {
+      transition: none;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+    .tab-page {
+      width: 25%;
+      flex-shrink: 0;
+      padding: 16px 16px 104px;
+      min-height: calc(100vh - 220px);
     }
 
     /* Cards */
     .card {
       background: var(--card);
-      border-radius: 18px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
       padding: 16px;
       margin-bottom: 14px;
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
     .card-header {
@@ -233,6 +319,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 12px;
+      gap: 8px;
     }
 
     .card-title {
@@ -247,7 +334,52 @@
       padding: 4px 10px;
       border-radius: 999px;
       background: var(--primary-light);
-      color: var(--primary-dark);
+      color: var(--primary);
+    }
+
+    /* Chart Toggle & Container */
+    .chart-toggle {
+      display: flex;
+      background: var(--subtle-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .chart-toggle button {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chart-toggle button.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .chart-legend {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      margin-right: 5px;
     }
 
     /* Target Progress */
@@ -279,7 +411,8 @@
     .progress-track {
       width: 100%;
       height: 12px;
-      background: #e2e8f0;
+      background: var(--subtle-bg);
+      border: 1px solid var(--border);
       border-radius: 999px;
       overflow: hidden;
       margin-bottom: 8px;
@@ -287,9 +420,9 @@
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #10b981, #059669);
+      background: linear-gradient(90deg, var(--primary), var(--primary-mid));
       border-radius: 999px;
-      transition: width 0.4s ease;
+      transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
       width: 0%;
     }
 
@@ -300,7 +433,7 @@
       color: var(--muted);
     }
 
-    /* Income Breakdown Grid (Harian / Mingguan / Bulanan) */
+    /* Income Breakdown Grid */
     .freq-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -308,10 +441,10 @@
     }
 
     .freq-card {
-      background: #f8fafc;
+      background: var(--subtle-bg);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 10px 8px;
+      padding: 10px 6px;
       text-align: center;
     }
 
@@ -325,7 +458,7 @@
     .freq-card strong {
       font-size: 12px;
       font-weight: 800;
-      color: var(--primary-dark);
+      color: var(--primary);
       word-break: break-word;
     }
 
@@ -342,7 +475,7 @@
     }
     .cat-bar-track {
       height: 7px;
-      background: #f1f5f9;
+      background: var(--subtle-bg);
       border-radius: 99px;
       overflow: hidden;
     }
@@ -357,10 +490,11 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      background: #f1f5f9;
+      background: var(--subtle-bg);
       padding: 5px;
       border-radius: 14px;
       margin-bottom: 14px;
+      border: 1px solid var(--border);
     }
 
     .type-btn {
@@ -378,13 +512,13 @@
     .type-btn.active-in {
       background: var(--primary);
       color: #ffffff;
-      box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+      box-shadow: 0 3px 10px var(--primary-glow);
     }
 
     .type-btn.active-out {
       background: var(--danger);
       color: #ffffff;
-      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+      box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3);
     }
 
     .form-group {
@@ -403,9 +537,9 @@
       width: 100%;
       padding: 12px 14px;
       border: 1.5px solid var(--border);
-      border-radius: 12px;
+      border-radius: 13px;
       font-size: 14px;
-      background: #ffffff;
+      background: var(--input-bg);
       color: var(--text);
       outline: none;
       transition: border-color 0.2s;
@@ -420,30 +554,73 @@
       padding: 13px;
       border: none;
       border-radius: 14px;
-      background: linear-gradient(135deg, #059669, #047857);
+      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
       color: #ffffff;
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.28);
+      box-shadow: 0 4px 14px var(--primary-glow);
       margin-top: 4px;
     }
 
     .btn-primary:active {
-      transform: scale(0.99);
+      transform: scale(0.98);
     }
 
     .btn-secondary {
       width: 100%;
       padding: 11px;
       border: 1.5px solid var(--border);
-      border-radius: 12px;
-      background: #ffffff;
+      border-radius: 13px;
+      background: var(--input-bg);
       color: var(--text);
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       margin-top: 8px;
+    }
+
+    /* Theme Selector Grid */
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .theme-option {
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 8px 4px;
+      background: var(--subtle-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.2s;
+    }
+
+    .theme-option:active {
+      transform: scale(0.94);
+    }
+
+    .theme-option.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .theme-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+      border: 2px solid #ffffff;
+    }
+
+    .theme-option span {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text);
     }
 
     /* Transaction List */
@@ -469,7 +646,7 @@
     .tx-icon {
       width: 40px;
       height: 40px;
-      border-radius: 12px;
+      border-radius: 13px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -480,7 +657,7 @@
 
     .tx-icon.in {
       background: var(--primary-light);
-      color: var(--primary-dark);
+      color: var(--primary);
     }
 
     .tx-icon.out {
@@ -521,8 +698,8 @@
     }
 
     .del-btn {
-      background: #f1f5f9;
-      border: none;
+      background: var(--subtle-bg);
+      border: 1px solid var(--border);
       color: var(--muted);
       width: 26px;
       height: 26px;
@@ -531,24 +708,20 @@
       cursor: pointer;
     }
 
-    .del-btn:hover {
-      background: var(--danger-light);
-      color: var(--danger);
-    }
-
     /* Filter Pills */
     .filter-row {
       display: flex;
       gap: 6px;
       margin-bottom: 12px;
       overflow-x: auto;
+      padding-bottom: 2px;
     }
 
     .filter-chip {
       padding: 6px 12px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: #ffffff;
+      background: var(--input-bg);
       font-size: 12px;
       font-weight: 600;
       color: var(--muted);
@@ -557,46 +730,130 @@
     }
 
     .filter-chip.active {
-      background: var(--primary-dark);
+      background: var(--primary);
       color: #ffffff;
-      border-color: var(--primary-dark);
+      border-color: var(--primary);
     }
 
-    /* Bottom Navigation */
-    .bottom-nav {
+    /* LIQUID GLASS FLOATING BOTTOM NAVIGATION */
+    .glass-nav-wrapper {
       position: fixed;
-      bottom: 0;
-      width: 100%;
-      max-width: 440px;
-      background: #ffffff;
-      border-top: 1px solid var(--border);
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 416px;
+      z-index: 30;
+    }
+
+    .bottom-nav {
+      position: relative;
+      background: var(--glass-dock);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 26px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      padding: 8px 4px 10px;
-      z-index: 20;
+      padding: 6px;
+      box-shadow: var(--glass-shadow);
+      overflow: hidden;
+    }
+
+    /* Specular top sheen across glass dock */
+    .bottom-nav::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), transparent);
+      pointer-events: none;
+    }
+
+    /* Liquid Glass Sliding Pill */
+    .liquid-pill {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: calc((100% - 12px) / 4);
+      height: calc(100% - 12px);
+      border-radius: 20px;
+      background: var(--glass-pill);
+      border: 1px solid var(--glass-pill-border);
+      box-shadow:
+        0 6px 18px var(--primary-glow),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.9),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.04);
+      transition: transform 0.38s cubic-bezier(0.22, 1.15, 0.36, 1);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .liquid-pill.stretching {
+      transition: none;
     }
 
     .nav-item {
+      position: relative;
+      z-index: 2;
       border: none;
       background: none;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      justify-content: center;
+      gap: 3px;
+      padding: 6px 2px;
       color: var(--muted);
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
+      transition: color 0.25s ease, transform 0.2s ease;
     }
 
     .nav-item.active {
       color: var(--primary);
-      font-weight: 700;
+      font-weight: 800;
+      transform: translateY(-1px);
     }
 
     .nav-item svg {
-      width: 22px;
-      height: 22px;
+      width: 21px;
+      height: 21px;
+    }
+
+    /* Quick Theme Popover Modal */
+    .theme-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 90;
+    }
+
+    .theme-modal.open {
+      display: flex;
+    }
+
+    .theme-sheet {
+      width: 100%;
+      max-width: 440px;
+      background: var(--card-solid);
+      border-top-left-radius: 26px;
+      border-top-right-radius: 26px;
+      padding: 20px 18px 28px;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+      animation: slideUp 0.25s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
     }
 
     /* Toast Notification */
@@ -613,7 +870,7 @@
       font-weight: 600;
       z-index: 100;
       transition: transform 0.3s ease;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
     }
 
     .toast.show {
@@ -622,7 +879,7 @@
 
     .empty-state {
       text-align: center;
-      padding: 24px 12px;
+      padding: 20px 12px;
       color: var(--muted);
       font-size: 13px;
     }
@@ -639,7 +896,7 @@
           <div class="brand-logo">Rp</div>
           <div class="brand-text">
             <h1>My money</h1>
-            <p>Asisten Tabungan & Keuangan</p>
+            <p>Geser layar untuk berpindah menu</p>
           </div>
         </div>
         <div class="header-actions">
@@ -648,8 +905,17 @@
               <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
             </svg>
           </button>
+          <button class="icon-btn" onclick="openThemeModal()" title="Pilih Tema Warna">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+              <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+              <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+              <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+            </svg>
+          </button>
           <button class="icon-btn" onclick="togglePrivacy()" title="Sembunyikan/Tampilkan Saldo">
-            <svg id="eyeIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
               <circle cx="12" cy="12" r="3"/>
             </svg>
@@ -660,7 +926,7 @@
       <div class="balance-box">
         <div class="balance-label">
           <span>Total Saldo Tabungan</span>
-          <span id="headerPeriodBadge" style="background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:99px;font-size:10px;">Target Per Bulan</span>
+          <span id="headerPeriodBadge" style="background:rgba(255,255,255,0.22);padding:2px 9px;border-radius:99px;font-size:10px;font-weight:700;">Target Per Bulan</span>
         </div>
         <div class="balance-amount" id="totalBalance">Rp 0</div>
         <div class="summary-row">
@@ -682,242 +948,297 @@
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- TAB 1: BERANDA -->
-      <section id="tab-home" class="tab-section active">
-        <!-- Target Progress Card -->
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Progres Target Tabungan</span>
-            <span class="pill" id="targetPeriodTag">Per Bulan</span>
+    <!-- Swipeable Main Viewport -->
+    <div class="swipe-viewport" id="swipeViewport">
+      <div class="swipe-track" id="swipeTrack">
+
+        <!-- PAGE 0: BERANDA -->
+        <section class="tab-page" id="page-0">
+          <!-- Target Progress Card -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Progres Target Tabungan</span>
+              <span class="pill" id="targetPeriodTag">Per Bulan</span>
+            </div>
+            <div class="target-name" id="displayTargetName">Tabungan Utama</div>
+            <div class="target-numbers">
+              <span class="target-current" id="displaySaved">Rp 0</span>
+              <span class="target-goal">dari <strong id="displayTargetGoal">Rp 1.000.000</strong></span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="targetProgressBar"></div>
+            </div>
+            <div class="target-meta">
+              <span id="targetPercentText">0% tercapai</span>
+              <span id="targetRemainingText">Kurang Rp 1.000.000</span>
+            </div>
           </div>
-          <div class="target-name" id="displayTargetName">Tabungan Utama</div>
-          <div class="target-numbers">
-            <span class="target-current" id="displaySaved">Rp 0</span>
-            <span class="target-goal">dari <strong id="displayTargetGoal">Rp 1.000.000</strong></span>
+
+          <!-- Grafik Pemasukan & Pengeluaran -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Grafik Keuangan</span>
+              <div class="chart-toggle">
+                <button type="button" id="btnChartBar" class="active" onclick="setChartMode('bar')">Batang</button>
+                <button type="button" id="btnChartDonut" onclick="setChartMode('donut')">Lingkaran</button>
+              </div>
+            </div>
+            <div id="financeChartContainer"></div>
+            <div class="chart-legend">
+              <span><i class="legend-dot" style="background:var(--primary)"></i>Pemasukan</span>
+              <span><i class="legend-dot" style="background:var(--danger)"></i>Pengeluaran</span>
+            </div>
           </div>
-          <div class="progress-track">
-            <div class="progress-fill" id="targetProgressBar"></div>
+
+          <!-- Pemasukan Per Periode -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Rincian Pemasukan</span>
+              <span style="font-size:11px;color:var(--muted);">Per Periode</span>
+            </div>
+            <div class="freq-grid">
+              <div class="freq-card">
+                <span>Per Hari</span>
+                <strong id="incDaily">Rp 0</strong>
+              </div>
+              <div class="freq-card">
+                <span>Per Minggu</span>
+                <strong id="incWeekly">Rp 0</strong>
+              </div>
+              <div class="freq-card">
+                <span>Per Bulan</span>
+                <strong id="incMonthly">Rp 0</strong>
+              </div>
+            </div>
           </div>
-          <div class="target-meta">
-            <span id="targetPercentText">0% tercapai</span>
-            <span id="targetRemainingText">Kurang Rp 1.000.000</span>
+
+          <!-- Pengeluaran Per Kategori -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Ringkasan Pengeluaran</span>
+            </div>
+            <div id="expenseCategoryBars">
+              <div class="empty-state">Belum ada catatan pengeluaran.</div>
+            </div>
           </div>
+
+          <!-- Transaksi Terakhir -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Aktivitas Terbaru</span>
+              <button onclick="goToTab(2)" style="border:none;background:none;color:var(--primary);font-size:12px;font-weight:700;cursor:pointer;">Lihat Semua</button>
+            </div>
+            <div id="recentTransactions">
+              <div class="empty-state">Belum ada transaksi tercatat.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PAGE 1: CATAT TRANSAKSI -->
+        <section class="tab-page" id="page-1">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Catat Keuangan Baru</span>
+            </div>
+
+            <div class="type-switch">
+              <button type="button" class="type-btn active-in" id="btnTypeIn" onclick="setTxType('income')">+ Pemasukan</button>
+              <button type="button" class="type-btn" id="btnTypeOut" onclick="setTxType('expense')">- Pengeluaran</button>
+            </div>
+
+            <form id="txForm" onsubmit="saveTransaction(event)">
+              <div class="form-group">
+                <label for="txAmount">Nominal (Rp)</label>
+                <input type="text" inputmode="numeric" id="txAmount" class="form-control" placeholder="Contoh: 50.000" oninput="formatRupiahInput(this)" required />
+              </div>
+
+              <div class="form-group" id="incomeFreqGroup">
+                <label for="txFreq">Periode Pemasukan</label>
+                <select id="txFreq" class="form-control">
+                  <option value="Per Hari">Per Hari (Uang Saku / Harian)</option>
+                  <option value="Per Minggu">Per Minggu (Mingguan)</option>
+                  <option value="Per Bulan">Per Bulan (Bulanan / Gaji)</option>
+                </select>
+              </div>
+
+              <div class="form-group" id="expenseCatGroup" style="display:none;">
+                <label for="txCategory">Kategori Pengeluaran</label>
+                <select id="txCategory" class="form-control">
+                  <option value="Makan & Minum">Makan & Minum</option>
+                  <option value="Transportasi">Transportasi</option>
+                  <option value="Sekolah & Alat Tulis">Sekolah & Alat Tulis</option>
+                  <option value="Hiburan">Hiburan</option>
+                  <option value="Belanja">Belanja</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="txNote">Catatan / Keterangan</label>
+                <input type="text" id="txNote" class="form-control" placeholder="Contoh: Uang jajan, Nabung rutin..." required />
+              </div>
+
+              <div class="form-group">
+                <label for="txDate">Tanggal</label>
+                <input type="date" id="txDate" class="form-control" required />
+              </div>
+
+              <button type="submit" class="btn-primary" id="submitTxBtn">Simpan Pemasukan</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- PAGE 2: RIWAYAT -->
+        <section class="tab-page" id="page-2">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Riwayat Transaksi</span>
+              <button onclick="exportCSV()" style="border:none;background:var(--primary-light);color:var(--primary);padding:5px 10px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;">Unduh CSV</button>
+            </div>
+
+            <div class="form-group" style="margin-bottom:10px;">
+              <input type="text" id="searchInput" class="form-control" placeholder="Cari catatan atau kategori..." oninput="renderAll()" />
+            </div>
+
+            <div class="filter-row">
+              <button class="filter-chip active" onclick="setFilter('all', this)">Semua</button>
+              <button class="filter-chip" onclick="setFilter('income', this)">Pemasukan</button>
+              <button class="filter-chip" onclick="setFilter('expense', this)">Pengeluaran</button>
+              <button class="filter-chip" onclick="setFilter('Per Hari', this)">Per Hari</button>
+              <button class="filter-chip" onclick="setFilter('Per Minggu', this)">Per Minggu</button>
+              <button class="filter-chip" onclick="setFilter('Per Bulan', this)">Per Bulan</button>
+            </div>
+
+            <div id="fullTransactionList">
+              <div class="empty-state">Belum ada riwayat transaksi.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PAGE 3: TARGET & TEMA -->
+        <section class="tab-page" id="page-3">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Atur Target Tabungan</span>
+            </div>
+            <form onsubmit="saveTargetSettings(event)">
+              <div class="form-group">
+                <label for="targetNameInput">Nama Target Tabungan</label>
+                <input type="text" id="targetNameInput" class="form-control" placeholder="Contoh: Beli Laptop Baru" required />
+              </div>
+
+              <div class="form-group">
+                <label for="targetPeriodInput">Jangka Waktu Target</label>
+                <select id="targetPeriodInput" class="form-control">
+                  <option value="Per Bulan">Per Bulan</option>
+                  <option value="Per Tahun">Per Tahun</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="targetAmountInput">Total Target Nominal (Rp)</label>
+                <input type="text" inputmode="numeric" id="targetAmountInput" class="form-control" placeholder="Contoh: 1.000.000" oninput="formatRupiahInput(this)" required />
+              </div>
+
+              <button type="submit" class="btn-primary">Simpan Target</button>
+            </form>
+          </div>
+
+          <!-- Theme Selector Card -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Tema Warna Aplikasi</span>
+              <span class="pill" id="activeThemeLabel">Emerald</span>
+            </div>
+            <div class="theme-grid" id="settingsThemeGrid"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Backup & Data Aplikasi</span>
+            </div>
+            <p style="font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.5;">
+              Semua data tersimpan otomatis di perangkat Anda. Unduh laporan ke Excel/CSV atau atur ulang data kapan saja.
+            </p>
+            <button type="button" class="btn-secondary" onclick="exportCSV()">Ekspor Laporan ke CSV (Excel)</button>
+            <button type="button" class="btn-secondary" style="color:var(--danger);border-color:rgba(239,68,68,0.35);" onclick="resetAllData()">Reset Semua Data</button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Liquid Glass Floating Bottom Navigation -->
+    <div class="glass-nav-wrapper">
+      <nav class="bottom-nav" id="bottomNav">
+        <div class="liquid-pill" id="liquidPill"></div>
+
+        <button class="nav-item active" id="nav-0" onclick="goToTab(0)">
+          <svg fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1V9.5z"/>
+          </svg>
+          <span>Beranda</span>
+        </button>
+        <button class="nav-item" id="nav-1" onclick="goToTab(1)">
+          <svg fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 8v8M8 12h8"/>
+          </svg>
+          <span>Catat</span>
+        </button>
+        <button class="nav-item" id="nav-2" onclick="goToTab(2)">
+          <svg fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+          </svg>
+          <span>Riwayat</span>
+        </button>
+        <button class="nav-item" id="nav-3" onclick="goToTab(3)">
+          <svg fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <circle cx="12" cy="12" r="5"/>
+            <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+          </svg>
+          <span>Target</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Quick Theme Modal -->
+    <div class="theme-modal" id="themeModal" onclick="closeThemeModal(event)">
+      <div class="theme-sheet" onclick="event.stopPropagation()">
+        <div class="card-header">
+          <span class="card-title">Pilih Tema Warna</span>
+          <button onclick="closeThemeModal()" style="border:none;background:none;color:var(--muted);font-weight:700;font-size:14px;cursor:pointer;">Tutup</button>
         </div>
-
-        <!-- Pemasukan Per Periode -->
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Rincian Pemasukan</span>
-            <span style="font-size:11px;color:var(--muted);">Berdasarkan Periode</span>
-          </div>
-          <div class="freq-grid">
-            <div class="freq-card">
-              <span>Per Hari</span>
-              <strong id="incDaily">Rp 0</strong>
-            </div>
-            <div class="freq-card">
-              <span>Per Minggu</span>
-              <strong id="incWeekly">Rp 0</strong>
-            </div>
-            <div class="freq-card">
-              <span>Per Bulan</span>
-              <strong id="incMonthly">Rp 0</strong>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pengeluaran Per Kategori -->
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Ringkasan Pengeluaran</span>
-          </div>
-          <div id="expenseCategoryBars">
-            <div class="empty-state">Belum ada catatan pengeluaran.</div>
-          </div>
-        </div>
-
-        <!-- Transaksi Terakhir -->
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Aktivitas Terbaru</span>
-            <button onclick="switchTab('history')" style="border:none;background:none;color:var(--primary);font-size:12px;font-weight:700;cursor:pointer;">Lihat Semua</button>
-          </div>
-          <div id="recentTransactions">
-            <div class="empty-state">Belum ada transaksi tercatat.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 2: TAMBAH TRANSAKSI -->
-      <section id="tab-add" class="tab-section">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Catat Keuangan Baru</span>
-          </div>
-
-          <div class="type-switch">
-            <button type="button" class="type-btn active-in" id="btnTypeIn" onclick="setTxType('income')">+ Pemasukan</button>
-            <button type="button" class="type-btn" id="btnTypeOut" onclick="setTxType('expense')">- Pengeluaran</button>
-          </div>
-
-          <form id="txForm" onsubmit="saveTransaction(event)">
-            <div class="form-group">
-              <label for="txAmount">Nominal (Rp)</label>
-              <input type="text" inputmode="numeric" id="txAmount" class="form-control" placeholder="Contoh: 50.000" oninput="formatRupiahInput(this)" required />
-            </div>
-
-            <div class="form-group" id="incomeFreqGroup">
-              <label for="txFreq">Periode Pemasukan</label>
-              <select id="txFreq" class="form-control">
-                <option value="Per Hari">Per Hari (Uang Saku / Harian)</option>
-                <option value="Per Minggu">Per Minggu (Mingguan)</option>
-                <option value="Per Bulan">Per Bulan (Bulanan / Gaji)</option>
-              </select>
-            </div>
-
-            <div class="form-group" id="expenseCatGroup" style="display:none;">
-              <label for="txCategory">Kategori Pengeluaran</label>
-              <select id="txCategory" class="form-control">
-                <option value="Makan & Minum">Makan & Minum</option>
-                <option value="Transportasi">Transportasi</option>
-                <option value="Sekolah & Alat Tulis">Sekolah & Alat Tulis</option>
-                <option value="Hiburan">Hiburan</option>
-                <option value="Belanja">Belanja</option>
-                <option value="Lainnya">Lainnya</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="txNote">Catatan / Keterangan</label>
-              <input type="text" id="txNote" class="form-control" placeholder="Contoh: Uang jajan, Nabung rutin..." required />
-            </div>
-
-            <div class="form-group">
-              <label for="txDate">Tanggal</label>
-              <input type="date" id="txDate" class="form-control" required />
-            </div>
-
-            <button type="submit" class="btn-primary" id="submitTxBtn">Simpan Pemasukan</button>
-          </form>
-        </div>
-      </section>
-
-      <!-- TAB 3: RIWAYAT -->
-      <section id="tab-history" class="tab-section">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Riwayat Transaksi</span>
-            <button onclick="exportCSV()" style="border:none;background:var(--primary-light);color:var(--primary-dark);padding:5px 10px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;">Unduh CSV</button>
-          </div>
-
-          <div class="form-group" style="margin-bottom:10px;">
-            <input type="text" id="searchInput" class="form-control" placeholder="Cari catatan atau kategori..." oninput="renderAll()" />
-          </div>
-
-          <div class="filter-row">
-            <button class="filter-chip active" onclick="setFilter('all', this)">Semua</button>
-            <button class="filter-chip" onclick="setFilter('income', this)">Pemasukan</button>
-            <button class="filter-chip" onclick="setFilter('expense', this)">Pengeluaran</button>
-            <button class="filter-chip" onclick="setFilter('Per Hari', this)">Per Hari</button>
-            <button class="filter-chip" onclick="setFilter('Per Minggu', this)">Per Minggu</button>
-            <button class="filter-chip" onclick="setFilter('Per Bulan', this)">Per Bulan</button>
-          </div>
-
-          <div id="fullTransactionList">
-            <div class="empty-state">Belum ada riwayat transaksi.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 4: TARGET & PENGATURAN -->
-      <section id="tab-target" class="tab-section">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Atur Target Tabungan</span>
-          </div>
-          <form onsubmit="saveTargetSettings(event)">
-            <div class="form-group">
-              <label for="targetNameInput">Nama Target Tabungan</label>
-              <input type="text" id="targetNameInput" class="form-control" placeholder="Contoh: Beli Laptop Baru" required />
-            </div>
-
-            <div class="form-group">
-              <label for="targetPeriodInput">Jangka Waktu Target</label>
-              <select id="targetPeriodInput" class="form-control">
-                <option value="Per Bulan">Per Bulan</option>
-                <option value="Per Tahun">Per Tahun</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="targetAmountInput">Total Target Nominal (Rp)</label>
-              <input type="text" inputmode="numeric" id="targetAmountInput" class="form-control" placeholder="Contoh: 1.000.000" oninput="formatRupiahInput(this)" required />
-            </div>
-
-            <button type="submit" class="btn-primary">Simpan Target</button>
-          </form>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Backup & Data Aplikasi</span>
-          </div>
-          <p style="font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.5;">
-            Semua data tersimpan otomatis di perangkat Anda. Anda dapat mengunduh laporan ke Excel/CSV atau mengatur ulang data kapan saja.
-          </p>
-          <button type="button" class="btn-secondary" onclick="exportCSV()">Ekspor Laporan ke CSV (Excel)</button>
-          <button type="button" class="btn-secondary" style="color:var(--danger);border-color:#fecaca;" onclick="resetAllData()">Reset Semua Data</button>
-        </div>
-      </section>
-    </main>
-
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-      <button class="nav-item active" id="nav-home" onclick="switchTab('home')">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1V9.5z"/>
-        </svg>
-        <span>Beranda</span>
-      </button>
-      <button class="nav-item" id="nav-add" onclick="switchTab('add')">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="9"/>
-          <path d="M12 8v8M8 12h8"/>
-        </svg>
-        <span>Catat</span>
-      </button>
-      <button class="nav-item" id="nav-history" onclick="switchTab('history')">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-        </svg>
-        <span>Riwayat</span>
-      </button>
-      <button class="nav-item" id="nav-target" onclick="switchTab('target')">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="9"/>
-          <circle cx="12" cy="12" r="5"/>
-          <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
-        </svg>
-        <span>Target</span>
-      </button>
-    </nav>
+        <div class="theme-grid" id="modalThemeGrid"></div>
+      </div>
+    </div>
   </div>
 
   <script>
     // State Management
     const STORAGE_KEY = 'my_money_app_v1';
+    const THEMES = [
+      { id: 'emerald', name: 'Emerald', swatch: 'linear-gradient(135deg, #064e3b, #10b981)', meta: '#064e3b' },
+      { id: 'ocean', name: 'Ocean', swatch: 'linear-gradient(135deg, #0c4a6e, #0ea5e9)', meta: '#0c4a6e' },
+      { id: 'violet', name: 'Violet', swatch: 'linear-gradient(135deg, #3b0764, #8b5cf6)', meta: '#3b0764' },
+      { id: 'sunset', name: 'Sunset', swatch: 'linear-gradient(135deg, #7c2d12, #f97316)', meta: '#7c2d12' },
+      { id: 'dark', name: 'Gelap', swatch: 'linear-gradient(135deg, #0f172a, #10b981)', meta: '#0b1120' }
+    ];
+
     let appState = {
       targetName: 'Tabungan Utama',
       targetPeriod: 'Per Bulan',
       targetAmount: 1000000,
       privacyMode: false,
+      theme: 'emerald',
       transactions: []
     };
 
+    let currentTabIndex = 0;
     let currentTxType = 'income';
     let currentFilter = 'all';
+    let chartMode = 'bar';
     let deferredPrompt = null;
 
     // Load from localStorage
@@ -934,15 +1255,58 @@
       document.getElementById('targetNameInput').value = appState.targetName;
       document.getElementById('targetPeriodInput').value = appState.targetPeriod;
       document.getElementById('targetAmountInput').value = formatNumber(appState.targetAmount);
+      applyTheme(appState.theme || 'emerald', false);
     }
 
     function saveState() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
     }
 
+    // Theme Handling
+    function applyTheme(themeId, notify = true) {
+      const themeObj = THEMES.find(t => t.id === themeId) || THEMES[0];
+      appState.theme = themeObj.id;
+      if (themeObj.id === 'emerald') {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', themeObj.id);
+      }
+      document.getElementById('metaThemeColor').setAttribute('content', themeObj.meta);
+      document.getElementById('activeThemeLabel').textContent = themeObj.name;
+      renderThemePickers();
+      saveState();
+      renderChart();
+      if (notify) showToast('Tema ' + themeObj.name + ' diterapkan');
+    }
+
+    function renderThemePickers() {
+      const markup = THEMES.map(t => `
+        <button type="button" class="theme-option ${appState.theme === t.id ? 'active' : ''}" onclick="applyTheme('${t.id}')">
+          <div class="theme-swatch" style="background:${t.swatch}"></div>
+          <span>${t.name}</span>
+        </button>
+      `).join('');
+      document.getElementById('settingsThemeGrid').innerHTML = markup;
+      document.getElementById('modalThemeGrid').innerHTML = markup;
+    }
+
+    function openThemeModal() {
+      document.getElementById('themeModal').classList.add('open');
+    }
+
+    function closeThemeModal() {
+      document.getElementById('themeModal').classList.remove('open');
+    }
+
     // Formatting Helpers
     function formatNumber(num) {
       return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    function formatShortRupiah(num) {
+      if (num >= 1000000) return (num / 1000000).toFixed(1).replace('.0', '') + 'jt';
+      if (num >= 1000) return Math.round(num / 1000) + 'rb';
+      return num.toString();
     }
 
     function formatCurrency(num) {
@@ -967,13 +1331,92 @@
       setTimeout(() => t.classList.remove('show'), 2200);
     }
 
-    // Navigation
-    function switchTab(tabName) {
-      document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      document.getElementById('tab-' + tabName).classList.add('active');
-      document.getElementById('nav-' + tabName).classList.add('active');
+    // Liquid Glass Navigation & Swipe Logic
+    function goToTab(index) {
+      currentTabIndex = Math.max(0, Math.min(3, index));
+      const track = document.getElementById('swipeTrack');
+      const pill = document.getElementById('liquidPill');
+
+      track.classList.remove('dragging');
+      pill.classList.remove('stretching');
+
+      track.style.transform = `translate3d(-${currentTabIndex * 25}%, 0, 0)`;
+      pill.style.transform = `translate3d(${currentTabIndex * 100}%, 0, 0) scaleX(1)`;
+
+      document.querySelectorAll('.nav-item').forEach((n, idx) => {
+        n.classList.toggle('active', idx === currentTabIndex);
+      });
     }
+
+    // Touch Gesture Swipe Handler with Liquid Glass Stretch
+    (function initSwipeGestures() {
+      const viewport = document.getElementById('swipeViewport');
+      const track = document.getElementById('swipeTrack');
+      const pill = document.getElementById('liquidPill');
+
+      let startX = 0;
+      let startY = 0;
+      let deltaX = 0;
+      let isHorizontalSwipe = null;
+
+      viewport.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        deltaX = 0;
+        isHorizontalSwipe = null;
+      }, { passive: true });
+
+      viewport.addEventListener('touchmove', (e) => {
+        if (e.touches.length !== 1) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+
+        if (isHorizontalSwipe === null) {
+          if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+            isHorizontalSwipe = Math.abs(dx) > Math.abs(dy);
+          }
+        }
+
+        if (!isHorizontalSwipe) return;
+
+        deltaX = dx;
+        const width = viewport.offsetWidth || 360;
+        // Edge resistance
+        let effectiveDx = deltaX;
+        if ((currentTabIndex === 0 && deltaX > 0) || (currentTabIndex === 3 && deltaX < 0)) {
+          effectiveDx = deltaX * 0.28;
+        }
+
+        track.classList.add('dragging');
+        pill.classList.add('stretching');
+
+        const basePercent = -currentTabIndex * 25;
+        const dragPercent = (effectiveDx / width) * 25;
+        track.style.transform = `translate3d(${basePercent + dragPercent}%, 0, 0)`;
+
+        // Liquid glass pill moves & stretches dynamically with finger
+        const progress = -effectiveDx / width;
+        const pillPos = (currentTabIndex + progress) * 100;
+        const stretch = 1 + Math.min(0.26, Math.abs(progress) * 0.45);
+        pill.style.transform = `translate3d(${pillPos}%, 0, 0) scaleX(${stretch})`;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', () => {
+        if (!isHorizontalSwipe) return;
+        const width = viewport.offsetWidth || 360;
+        const threshold = width * 0.18;
+
+        if (deltaX < -threshold && currentTabIndex < 3) {
+          goToTab(currentTabIndex + 1);
+        } else if (deltaX > threshold && currentTabIndex > 0) {
+          goToTab(currentTabIndex - 1);
+        } else {
+          goToTab(currentTabIndex);
+        }
+        isHorizontalSwipe = null;
+      });
+    })();
 
     function togglePrivacy() {
       appState.privacyMode = !appState.privacyMode;
@@ -996,7 +1439,7 @@
         incGroup.style.display = 'block';
         expGroup.style.display = 'none';
         submitBtn.textContent = 'Simpan Pemasukan';
-        submitBtn.style.background = 'linear-gradient(135deg, #059669, #047857)';
+        submitBtn.style.background = 'linear-gradient(135deg, var(--primary), var(--primary-mid))';
       } else {
         btnIn.className = 'type-btn';
         btnOut.className = 'type-btn active-out';
@@ -1032,7 +1475,7 @@
       document.getElementById('txAmount').value = '';
       document.getElementById('txNote').value = '';
       renderAll();
-      switchTab('home');
+      goToTab(0);
       showToast(currentTxType === 'income' ? 'Pemasukan berhasil dicatat!' : 'Pengeluaran berhasil dicatat!');
     }
 
@@ -1060,7 +1503,7 @@
       appState.targetAmount = amount;
       saveState();
       renderAll();
-      switchTab('home');
+      goToTab(0);
       showToast('Target tabungan diperbarui!');
     }
 
@@ -1070,6 +1513,113 @@
       document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
       el.classList.add('active');
       renderAll();
+    }
+
+    // Chart Rendering (Offline SVG Bar & Donut Charts)
+    function setChartMode(mode) {
+      chartMode = mode;
+      document.getElementById('btnChartBar').classList.toggle('active', mode === 'bar');
+      document.getElementById('btnChartDonut').classList.toggle('active', mode === 'donut');
+      renderChart();
+    }
+
+    function renderChart() {
+      const container = document.getElementById('financeChartContainer');
+      if (appState.transactions.length === 0) {
+        container.innerHTML = '<div class="empty-state">Catat pemasukan atau pengeluaran untuk melihat grafik.</div>';
+        return;
+      }
+
+      const styles = getComputedStyle(document.documentElement);
+      const primaryColor = styles.getPropertyValue('--primary').trim() || '#059669';
+      const dangerColor = styles.getPropertyValue('--danger').trim() || '#ef4444';
+      const mutedColor = styles.getPropertyValue('--muted').trim() || '#64748b';
+      const borderColor = styles.getPropertyValue('--border').trim() || '#e2e8f0';
+
+      if (chartMode === 'donut') {
+        let totalIn = 0;
+        let totalOut = 0;
+        appState.transactions.forEach(t => {
+          if (t.type === 'income') totalIn += t.amount;
+          else totalOut += t.amount;
+        });
+
+        const sum = totalIn + totalOut || 1;
+        const inPct = Math.round((totalIn / sum) * 100);
+        const outPct = 100 - inPct;
+        const radius = 52;
+        const circumference = 2 * Math.PI * radius;
+        const inDash = (totalIn / sum) * circumference;
+        const outDash = (totalOut / sum) * circumference;
+
+        container.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:space-around;padding:6px 0;">
+            <svg width="136" height="136" viewBox="0 0 136 136">
+              <circle cx="68" cy="68" r="${radius}" fill="none" stroke="${borderColor}" stroke-width="16" />
+              <circle cx="68" cy="68" r="${radius}" fill="none" stroke="${primaryColor}" stroke-width="16"
+                stroke-dasharray="${inDash} ${circumference}" transform="rotate(-90 68 68)" stroke-linecap="round" />
+              <circle cx="68" cy="68" r="${radius}" fill="none" stroke="${dangerColor}" stroke-width="16"
+                stroke-dasharray="${outDash} ${circumference}" stroke-dashoffset="-${inDash}" transform="rotate(-90 68 68)" />
+              <text x="68" y="64" text-anchor="middle" fill="${mutedColor}" font-size="10" font-weight="700">Rasio Masuk</text>
+              <text x="68" y="81" text-anchor="middle" fill="${primaryColor}" font-size="16" font-weight="800">${inPct}%</text>
+            </svg>
+            <div style="display:flex;flex-direction:column;gap:10px;font-size:12px;">
+              <div>
+                <span style="color:var(--muted);display:block;font-size:11px;">Pemasukan (${inPct}%)</span>
+                <strong style="color:${primaryColor};font-size:14px;">${formatCurrency(totalIn)}</strong>
+              </div>
+              <div>
+                <span style="color:var(--muted);display:block;font-size:11px;">Pengeluaran (${outPct}%)</span>
+                <strong style="color:${dangerColor};font-size:14px;">${formatCurrency(totalOut)}</strong>
+              </div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // Group last 5 active dates for Bar Chart
+      const grouped = {};
+      appState.transactions.forEach(t => {
+        if (!grouped[t.date]) grouped[t.date] = { in: 0, out: 0 };
+        if (t.type === 'income') grouped[t.date].in += t.amount;
+        else grouped[t.date].out += t.amount;
+      });
+
+      const dates = Object.keys(grouped).sort().slice(-5);
+      let maxVal = 1;
+      dates.forEach(d => {
+        maxVal = Math.max(maxVal, grouped[d].in, grouped[d].out);
+      });
+
+      const chartH = 115;
+      const colWidth = 300 / dates.length;
+
+      const barsSvg = dates.map((d, idx) => {
+        const item = grouped[d];
+        const inH = Math.max(4, Math.round((item.in / maxVal) * chartH));
+        const outH = Math.max(4, Math.round((item.out / maxVal) * chartH));
+        const centerX = idx * colWidth + colWidth / 2;
+        const label = d.slice(5); // MM-DD
+
+        return `
+          <g>
+            <rect x="${centerX - 15}" y="${chartH - inH + 14}" width="12" height="${inH}" rx="4" fill="${primaryColor}" />
+            <rect x="${centerX + 3}" y="${chartH - outH + 14}" width="12" height="${outH}" rx="4" fill="${dangerColor}" />
+            <text x="${centerX}" y="${chartH + 30}" text-anchor="middle" fill="${mutedColor}" font-size="10" font-weight="600">${label}</text>
+          </g>
+        `;
+      }).join('');
+
+      container.innerHTML = `
+        <svg width="100%" height="155" viewBox="0 0 300 155" preserveAspectRatio="xMidYMid meet">
+          <line x1="8" y1="14" x2="292" y2="14" stroke="${borderColor}" stroke-dasharray="3 3" />
+          <line x1="8" y1="${chartH / 2 + 14}" x2="292" y2="${chartH / 2 + 14}" stroke="${borderColor}" stroke-dasharray="3 3" />
+          <line x1="8" y1="${chartH + 14}" x2="292" y2="${chartH + 14}" stroke="${borderColor}" />
+          <text x="8" y="11" fill="${mutedColor}" font-size="9" font-weight="700">Maks: ${appState.privacyMode ? '•••' : formatShortRupiah(maxVal)}</text>
+          ${barsSvg}
+        </svg>
+      `;
     }
 
     // Render Dashboard & Lists
@@ -1116,6 +1666,9 @@
       document.getElementById('targetRemainingText').textContent = remaining === 0
         ? 'Target Tercapai!'
         : 'Kurang ' + formatCurrency(remaining);
+
+      // Render Chart
+      renderChart();
 
       // Income Breakdown
       document.getElementById('incDaily').textContent = formatCurrency(incDaily);
@@ -1224,6 +1777,7 @@
           targetPeriod: 'Per Bulan',
           targetAmount: 1000000,
           privacyMode: false,
+          theme: appState.theme,
           transactions: []
         };
         loadState();
